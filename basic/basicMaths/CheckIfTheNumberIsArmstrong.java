@@ -8,7 +8,7 @@ public class CheckIfTheNumberIsArmstrong {
 
         while (copyN > 0) {
             int base = copyN % 10;
-            sum += Math.powExact(base, exponential);
+            sum += Math.pow(base, exponential);
             copyN /= 10;
         }
 
