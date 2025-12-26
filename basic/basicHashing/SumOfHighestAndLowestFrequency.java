@@ -8,17 +8,21 @@ public class SumOfHighestAndLowestFrequency {
     private static int sumHighestAndLowestFrequency(int[] nums) {
         Map<Integer, Integer> map = new HashMap<>();
 
+        // adding elements to map
         for (int num : nums) {
             map.put(num, map.getOrDefault(num, 0) + 1);
         }
 
+        // variables to store max frequency and min frequency
         int maxFrequency = Integer.MIN_VALUE, minFrequency = Integer.MAX_VALUE;
 
+        // iterating through the map
         for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
             maxFrequency = Math.max(maxFrequency, entry.getValue());
             minFrequency = Math.min(minFrequency, entry.getValue());
         }
 
+        // return the sum of max frequency and min frequency
         return maxFrequency + minFrequency;
     }
     
