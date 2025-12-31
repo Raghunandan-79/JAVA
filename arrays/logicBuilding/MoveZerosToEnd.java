@@ -12,11 +12,16 @@ public class MoveZerosToEnd {
     private static void moveZeroes(int[] nums) {
         int n = nums.length;
 
+        // taking a variable j
         int j = 0;
 
         for (int i = 0; i < n; i++) {
+            // if current element of array is non zero
             if (nums[i] != 0) {
+                // swap non zero element with zero element
                 swap(nums, i, j);
+
+                // increment value of j
                 j++;
             }
         }
