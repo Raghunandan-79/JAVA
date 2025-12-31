@@ -1,34 +1,34 @@
 package arrays.logicBuilding;
 
 import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class RemoveDuplicatesFromSortedArray {
     private static int removeDuplicates(int[] nums) {
-        Set<Integer> set = new TreeSet<>();
+        int n = nums.length;
+        
+        // i to store unique element
+        int i = 0;
 
-        // adding elements to the set
-        for (int num : nums) {
-            set.add(num);
+        // j to iterate in the array
+        for (int j = 1; j < n; j++) {
+            // if the element is unique
+            if (nums[i] != nums[j]) {
+                // increment the value of i
+                i++;
+
+                // updating i index with the unique element
+                nums[i] = nums[j];
+            }
         }
 
-        // taking j as 0
-        int j = 0;
-
-        // putting elements of set back to array
-        for (int val : set) {
-            nums[j++] = val;
-        }
-
-        // printing array make sure to remove this before submitting on any platform
-        for (int i = 0; i < set.size(); i++) {
-            System.out.print(nums[i] + " ");
+        // printing array, remove this part before submitting on any coding platform
+        for (int j= 0; j <= i; j++) {
+            System.out.print(nums[j] + " ");
         }
         System.out.println();
 
-        // returning the size of array with unique elements
-        return set.size();
+        // returning the unique array index
+        return i + 1;
     }
     
     public static void main(String[] args) {
