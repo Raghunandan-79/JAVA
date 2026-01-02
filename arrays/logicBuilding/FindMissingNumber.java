@@ -6,19 +6,20 @@ public class FindMissingNumber {
     private static int missingNumber(int[] nums) {
         int n = nums.length;
 
-        // finding sum of n natural numbers
-        int sumOfNNaturalNumbers = (n * (n + 1)) / 2;
+        // variables to store xor
+        int xorr1 = 0, xorr2 = 0;
 
-        // variable to calculate sum of array elements
-        int sumOfArray = 0;
+        // iterating from 0 to n - 1
+        for (int i = 0; i < n; i++) {
+            // calculating xor with all array elements
+            xorr1 ^= nums[i];
 
-        // loop to calculate sum of array elements
-        for (int num : nums) {
-            sumOfArray += num;
+            // calculating xor with number from 1 to n
+            xorr2 ^= (i + 1);
         }
 
-        // returning the missing number
-        return sumOfNNaturalNumbers - sumOfArray;
+        // doing xor of both xor to get the missing number
+        return xorr1 ^ xorr2;
     }
 
     public static void main(String[] args) {
