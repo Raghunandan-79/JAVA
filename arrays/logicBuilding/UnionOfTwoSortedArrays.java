@@ -1,37 +1,70 @@
 package arrays.logicBuilding;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class UnionOfTwoSortedArrays {
     private static int[] unionArray(int[] nums1, int[] nums2) {
-        // TreeSet to store unique elements
-        Set<Integer> set = new TreeSet<>();
+        List<Integer> unionList = new ArrayList<>();
+        int n1 = nums1.length, n2 = nums2.length;
 
-        // adding all elements of array 1 to the set
-        for (int num : nums1) {
-            set.add(num);
+        // pointers to traverse arrays
+        int i = 0, j = 0;
+
+        // traversing both arrays simultaneously
+        while (i < n1 && j < n2) {
+            // if element of array 1 is less than equal to element of array 2
+            if (nums1[i] <= nums2[j]) {
+                /*  
+                * if union list is empty or last element of union list is not equal to current element
+                * of array 1 adding it to union list
+                */
+                if (unionList.isEmpty() || unionList.get(unionList.size() - 1) != nums1[i]) {
+                    unionList.add(nums1[i]);
+                }
+
+                // moving to next index of array 1
+                i++;
+            } else {
+                /*
+                * if union list is empty or last element of union list is not equal to current element 
+                * of array 2 adding it to the union list
+                */
+                if (unionList.isEmpty() || unionList.get(unionList.size() - 1) != nums2[j]) {
+                    unionList.add(nums2[j]);
+                }
+
+                // moving to next index of array 2
+                j++;
+            }
         }
 
-        // adding all elements of array 2 to the set
-        for (int num : nums2) {
-            set.add(num);
+        // adding remaining elements of array 1 to the union list
+        while (i < n1) {
+            if (unionList.isEmpty() || unionList.get(unionList.size() - 1) != nums1[i]) {
+                unionList.add(nums1[i]);
+            }
+
+            i++;
         }
 
-        // union array to store elements back 
-        int[] unionArray = new int[set.size()];
+        // adding remaining elements of array 2 to the union list
+        while (j < n2) {
+            if (unionList.isEmpty() || unionList.get(unionList.size() - 1) != nums2[j]) {
+                unionList.add(nums2[j]);
+            }
 
-        // idx to keep track 
-        int idx = 0;
-
-        // iterating the set and adding elements of set to the union array
-        for (int num : set) {
-            unionArray[idx++] = num;
+            j++;
         }
 
-        // returning the union array
-        return unionArray;
+        // putting elements of union list to array
+        int[] union = new int[unionList.size()];
+        for (int k = 0; k < unionList.size(); k++) {
+            union[k] = unionList.get(k);
+        }
+
+        return union;
     }
     
     public static void main(String[] args) {
